@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tic Tac Toe</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Baumans" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link href="main.css" rel="stylesheet" type="text/css">
+
+    </head>
+    <body>
+    
+    <div id="form">
+    <h1>TicTacToe</h1>
+    <form>
+        <div class="grou">      
+            <input type="tex" id="name" required>
+            <span class="highligh"></span>
+            <span class="ba"></span>
+            <label>Name</label>
+        </div>
+        <div class="grou">      
+            <input type="tex" id="room" required>
+            <span class="highligh"></span>
+            <span class="ba"></span>
+            <label>Room Name</label>
+        </div>
+        <h6>Available Rooms:</h6>
+        <ul id="alist">
+        </ul>
+        <div id="b">
+        <a id="cbtn" onclick="create()" style="background-color: #93b8d5;" class="waves-effect waves-light btn-large">Create</a><p>OR</p>
+        <a id="jbtn" onclick="join()" style="background-color: #93b8d5;" class="waves-effect waves-light btn-large">Join</a><p>OR</p><a id="cobtn" onclick="computer()" style="background-color: #93b8d5;" class="waves-effect waves-light btn-large">Computer</a>
+        </div>
+        </form>
+    </div>
+    
+    <div id="main">
+    
+    <div id="info"><span id="name1" class="atten">Waiting</span> <span id="vs">VS</span> <span id="name2">Waiting</span></div>
+    
+    <table>
+        <tr class="row">
+            <td onclick="button(0)" class="col"></td>
+            <td onclick="button(1)" class="col"></td>
+            <td onclick="button(2)" class="col"></td>
+        </tr>
+        <tr class="row">
+            <td onclick="button(3)" class="col"></td>
+            <td onclick="button(4)" class="col"></td>
+            <td onclick="button(5)" class="col"></td>
+        </tr>
+        <tr class="row">
+            <td onclick="button(6)" class="col"></td>
+            <td onclick="button(7)" class="col"></td>
+            <td onclick="button(8)" class="col"></td>
+        </tr>
+    </table>
+        
+    </div>
+    
+        <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase.js"></script>
+        <script>
+            var config = {
+                apiKey: "AIzaSyC3QrKWPIB5aSlQ2bKCTv4yOlYZC_apL4E",
+                authDomain: "tictactoe-6d36e.firebaseapp.com",
+                databaseURL: "https://tictactoe-6d36e.firebaseio.com",
+                projectId: "tictactoe-6d36e",
+                storageBucket: "tictactoe-6d36e.appspot.com",
+                messagingSenderId: "211898672217"
+            };
+            firebase.initializeApp(config);
+            var database = firebase.database();
+            var ref=database.ref("rooms/");
+            var list = [];
+            var available = [];
+            ref.on("value", data => {
+                if(data.val() !== null && data.val() !== undefined) {
+                    list = Object.keys(data.val());
+                    Object.keys(data.val()).forEach(function (key) {
+                        let temp = data.val();
+                        let current = temp[key];
+                        if (current.p2 === "")
+                            available.push(key);
+                    })
+                    var alist = document.getElementById("alist");
+                    alist.innerHTML = "";
+                    let hea = document.getElementsByTagName("h6")[0];
+                    hea.innerHTML = available.length > 0 ? "Available Rooms:" : "No Rooms Available!";
+                    available.forEach(roo => {
+                        let currli = document.createElement("li");
+                        currli.innerHTML = roo;
+                        currli.onclick = function () {
+                            rname = roo;
+                            join();
+                        }
+                        alist.appendChild(currli);
+                    });
+                }
+            })
+        </script>
+        <script src="main.js"></script>
+    </body>
+</html>
