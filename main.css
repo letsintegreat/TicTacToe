@@ -276,13 +276,15 @@ input:focus ~ .highligh {
     border-radius: 50%;
     z-index: 1;
     background-color: #93b8d5;
+    border: 15px solid #93b8d5;
     top: 0; right: 0; bottom: 0; left: 0; margin: auto;
     animation: 1s in forwards;
 }
 
 @keyframes in {
     from {transform: scale(0);}
-    to { transform: scale(1);}
+    70% {background-color: #93b8d5;}
+    to { transform: scale(1); background-color: transparent;}
 }
 .remove {
     animation: 1s remove forwards;
