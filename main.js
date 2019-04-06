@@ -253,7 +253,7 @@ function setWinner (winner) {
 }
 
 function computer() {
-    alert("Computer mod was added just so that the persons who dont have friends can have a look on the UI. \nBest Experience will be enjoyed in multiplayer");
+    alert("Computer mod was added just so that the persons who dont have friends can have a look at the UI. \nBest Experience can be enjoyed in multiplayer");
     mod = 1;
     document.getElementById("form").classList.add("slide2");
     document.getElementById("main").classList.add("slide");
