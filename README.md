@@ -1,6 +1,8 @@
-# TicTacToe
+# [TicTacToe](https://letsintegreat.github.io/TicTacToe/)
 
-Tech Stack: **HTML, CSS, Javascript, Firebase.**
+Tech Stack: **HTML, CSS, Javascript, Firebase.** \
+Game link: https://letsintegreat.github.io/TicTacToe/
+
 
 An online multiplayer Tic Tac Toe game.
 
